@@ -40,6 +40,22 @@ body {
   cursor: pointer;
   color: wheat;
 }
+.section-label {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+.section-label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: calc(15% + 12px);
+  height: 2px;
+  background: #d4af37;
+  border-radius: 999px;
+  opacity: 0.65;
+}
 .header {
   background: #111;
   width: 100%;
@@ -141,14 +157,632 @@ body {
 }
 .paslaugos {
   background: #1d1c1c;
-  padding: 100px 20px;
+  padding: 80px 0 100px;
+}
+.paslaugos-container {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  box-sizing: border-box;
+}
+.paslaugos-heading {
+  padding: 0;
+  grid-column: 1 /-1;
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+.section-label {
+  display: block;
+  margin-bottom: 22px;
+  color: #d4af37;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 .paslaugos-card {
-  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.035);
+  color: #ffffff;
+  padding: 36px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 0.3 ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s,
+    background 0.3 ease;
+  min-height: 190px;
+  padding: 38px 30px 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.paslaugos-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #d4af37;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
+}
+.paslaugos-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+}
+.paslaugos-card:hover::before {
+  transform: scaleX(1);
+}
+.paslaugos-card h3 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: 1.4rem;
+  line-height: 1.25;
+  transition: color 0.3s;
+}
+.paslaugos-card:hover h3 {
+  color: #ffffff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.15);
+}
+.paslaugos-card p {
+  margin: 0;
+  color: #bcbcbc;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+/* =====================================
+   ATLIKTI DARBAI
+===================================== */
+
+.darbai {
+  background: #141414;
+  padding: 90px 0 110px;
+  overflow: hidden;
+}
+
+.darbai-container {
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.darbai-heading {
+}
+
+/* Matoma slankiklio dalis */
+
+.projects-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 0 32px;
+  box-sizing: border-box;
+}
+
+/* Visų objektų eilė */
+
+.projects-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  padding: 0;
+  will-change: transform;
+
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Vienas objektas */
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc((min(1200px, calc(100vw - 48px)) - 48px) / 3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  min-width: 0;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(212, 175, 55, 0.45);
+  background: rgba(255, 255, 255, 0.05);
+
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.36);
+}
+
+.project-card.active-project {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.36);
+}
+
+/* Kortelės nuotraukų galerija */
+
+.project-gallery {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 4 / 3;
+  min-height: 290px;
+  overflow: hidden;
+  background: #101010;
+}
+
+.project-slides {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-slides img {
+  flex: 0 0 100%;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  display: block;
+
+  user-select: none;
+  pointer-events: none;
+}
+.project-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 7px 10px;
+
+  background: rgba(10, 10, 10, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+
+  backdrop-filter: blur(8px);
+}
+
+.project-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.42);
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.project-dot.active {
+  width: 22px;
+  background: #d4af37;
+}
+/* Laiko progreso juosta */
+
+.project-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.project-progress span {
+  display: block;
+
+  width: 0;
+  height: 100%;
+
+  background: #d4af37;
+}
+
+.project-card.active-project .project-progress span {
+  animation: projectProgress 4.5s linear forwards;
+}
+
+@keyframes projectProgress {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+/* Projekto tekstas */
+
+.project-content {
+  padding: 20px 24px 22px;
+}
+
+.project-content h3 {
+  margin: 0 0 11px;
+
+  color: #ffffff;
+
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.project-content p {
+  margin: 0 0 18px;
+
+  color: #bcbcbc;
+
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.project-meta {
+  color: #d4af37;
+
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Apatinis valdymas */
+
+.projects-controls {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin-top: 14px;
+}
+
+.projects-position {
+  display: flex;
+  gap: 7px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.current-project {
+  color: #d4af37;
+}
+
+.projects-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.projects-button {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.035);
+  color: #ffffff;
+
+  font-size: 1.2rem;
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.projects-button:hover {
+  transform: translateY(-2px);
+
+  background: #d4af37;
+  border-color: #d4af37;
+  color: #111111;
+}
+
+/* =====================================
+   PADIDINTA GALERIJA
+===================================== */
+
+.project-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 5000;
+
+  display: grid;
+  place-items: center;
+
   padding: 30px;
-  margin-bottom: 25px;
-  box-shadow: #000;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+.project-modal.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.project-modal-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(7px);
+}
+
+.project-modal-window {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 1050px);
+  max-height: calc(100vh - 60px);
+
+  overflow-y: auto;
+
+  background: #181818;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+
+  transform: translateY(24px) scale(0.97);
+
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-modal.open .project-modal-window {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  z-index: 5;
+
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+
+  background: rgba(10, 10, 10, 0.72);
+  color: #ffffff;
+
+  font-size: 1.8rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.modal-close:hover {
+  transform: rotate(90deg);
+
+  background: #d4af37;
+  color: #111111;
+}
+
+/* Didelė nuotrauka */
+
+.modal-gallery {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 16 / 10;
+
+  overflow: hidden;
+
+  background: #0d0d0d;
+  border-radius: 16px 16px 0 0;
+}
+
+.modal-slides {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.modal-slides img {
+  flex: 0 0 100%;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: contain;
+
+  background: #0d0d0d;
+}
+
+/* Didelės galerijos rodyklės */
+
+.modal-button {
+  position: absolute;
+  top: 50%;
+
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  transform: translateY(-50%);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+
+  background: rgba(10, 10, 10, 0.68);
+  color: #ffffff;
+
+  font-size: 1.2rem;
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.modal-button:hover {
+  background: #d4af37;
+  border-color: #d4af37;
+  color: #111111;
+}
+
+.modal-prev {
+  left: 20px;
+}
+
+.modal-next {
+  right: 20px;
+}
+
+.modal-counter {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+
+  display: flex;
+  gap: 6px;
+
+  padding: 8px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+
+  background: rgba(10, 10, 10, 0.72);
+  color: #ffffff;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+  backdrop-filter: blur(8px);
+}
+
+/* Modal tekstas */
+
+.modal-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+
+  padding: 30px 34px 20px;
+}
+
+.modal-title {
+  margin: 0 0 10px;
+
+  color: #ffffff;
+
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.2;
+}
+
+.modal-description {
+  max-width: 700px;
+  margin: 0;
+
+  color: #bcbcbc;
+
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.modal-meta {
+  flex-shrink: 0;
+
+  padding-top: 7px;
+
+  color: #d4af37;
+
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Modal taškai */
+
+.modal-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 0 30px 28px;
+}
+
+.modal-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  cursor: pointer;
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.modal-dot.active {
+  width: 26px;
+  background: #d4af37;
+}
+
+/* Atidarius modalą neleidžia slinkti puslapio */
+
+body.modal-open {
+  overflow: hidden;
 }
 .contacts {
   background: rgba(0, 0, 0, 0.844);
@@ -235,6 +869,99 @@ footer img {
     width: 100%;
     height: 420px;
     height: auto;
+  }
+  .paslaugos {
+    padding: 70px 24px;
+  }
+  .paslaugos-heading {
+    margin-bottom: 22px;
+  }
+  .paslaugos-container {
+    grid-template-columns: 1fr;
+  }
+  .paslaugos-card {
+    padding: 32px 26px;
+  }
+  .paslaugos-card:hover {
+    transform: none;
+  }
+  .paslaugos-line {
+    margin-bottom: 24px;
+  }
+  .darbai {
+    padding: 70px 0 90px;
+  }
+
+  .darbai-heading {
+    padding: 0 24px;
+    margin-bottom: 24px;
+  }
+
+  .projects-track {
+    gap: 16px;
+    padding: 0 24px;
+  }
+
+  .project-card {
+    flex-basis: 86%;
+  }
+
+  .project-content {
+    padding: 23px;
+  }
+
+  .projects-controls {
+    padding: 0 24px;
+  }
+
+  .project-modal {
+    padding: 14px;
+  }
+
+  .project-modal-window {
+    max-height: calc(100vh - 28px);
+    border-radius: 14px;
+  }
+
+  .modal-gallery {
+    aspect-ratio: 4 / 5;
+    border-radius: 14px 14px 0 0;
+  }
+
+  .modal-slides img {
+    object-fit: contain;
+  }
+
+  .modal-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-prev {
+    left: 10px;
+  }
+
+  .modal-next {
+    right: 10px;
+  }
+
+  .modal-close {
+    top: 10px;
+    right: 10px;
+
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-content {
+    display: block;
+    padding: 24px 22px 18px;
+  }
+
+  .modal-meta {
+    display: block;
+    margin-top: 17px;
+    padding: 0;
   }
   .contacts section {
     gap: 40px;
