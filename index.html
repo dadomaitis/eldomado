@@ -431,6 +431,30 @@
         let touchStartX = 0;
         let visibleStartIndex = 0;
 
+        let projectsTouchStartX = 0;
+        let projectsTouchEndX = 0;
+
+        viewport.addEventListener(
+          "touchstart",
+          (event) => {
+            projectsTouchStartX = event.changedTouches[0].screenX;
+          },
+          { passive: true },
+        );
+
+        viewport.addEventListener("touchend", (event) => {
+          projectsTouchEndX = event.changedTouches[0].screenX;
+
+          const swipeDistance = projectsTouchStartX - projectsTouchEndX;
+
+          if (Math.abs(swipeDistance) < 50) return;
+
+          if (swipeDistance > 0) {
+            nextProjectButton.click();
+          } else {
+            previousProjectButton.click();
+          }
+        });
         cards.forEach((card, cardIndex) => {
           const images = [...card.querySelectorAll(".project-slides img")];
 

@@ -266,6 +266,8 @@ body {
   overflow: hidden;
   padding: 24px 8 32px;
   box-sizing: border-box;
+
+  touch-action: pan-y;
 }
 
 /* Visų objektų eilė */
