@@ -580,6 +580,24 @@ body {
   width: 100%;
   height: auto;
 }
+.modal-image-area::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.38) 55%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  pointer-events: none;
+  z-index: 2;
+}
 .modal-slides {
   width: 100%;
   height: auto;
@@ -679,13 +697,12 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 4;
+  z-index: 3;
 
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 24px;
-
   padding: 12px 0 0;
 
   background: transparent;
@@ -710,7 +727,7 @@ body {
   font-size: 0.78rem;
   line-height: 1.4;
   font-weight: 400;
-  max-width: 300px;
+  max-width: 400px;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -907,6 +924,23 @@ body.modal-open {
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
 }
 
+.form-status {
+  min-height: 22px;
+  margin: 4px 0 0;
+
+  font-size: 0.82rem;
+  line-height: 1.4;
+
+  color: #8f8f8f;
+}
+
+.form-status.success {
+  color: #d4af37;
+}
+
+.form-status.error {
+  color: #d66a6a;
+}
 /* MYGTUKAS */
 
 .kontaktai-button {
