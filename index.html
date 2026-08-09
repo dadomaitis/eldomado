@@ -34,7 +34,7 @@
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.2.4/dist/kute.min.js"></script>
 
     <script type="application/ld+json">
-          {
+      {
         "@context": "https://schema.org",
         "@type": "Electrician",
         "name": "ELDOMADO",
@@ -44,13 +44,40 @@
           "@type": "AdministrativeArea",
           "name": "Šiauliai ir Šiaulių rajonas"
         },
-        "serviceType": [
-          "Elektrikas"
-          "Elektros instaliacija",
-          "Elektros saugos matavimai",
-          "Elektros gedimų diagnostika",
-          "Elektros gedimų šalinimas"
-        ]
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Elektros paslaugos",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Elektros instaliacija"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Elektros saugos matavimai"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Elektros gedimų diagnostika"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Elektros gedimų šalinimas"
+              }
+            }
+          ]
+        }
       }
     </script>
   </head>
